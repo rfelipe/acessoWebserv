@@ -26,13 +26,13 @@ public class Application {
 
 		 RetornaUsuario logar = new RetornaUsuario();
 		 RetornaFilme gerenciaFilme = new RetornaFilme();
-		 Usuario usuario =new Usuario();
-		 logar.VerificaUsario("","");
-		 gerenciaFilme.ListatodosFilme();
-		 gerenciaFilme.BuscaTituloFilme("");
-		 logar.criaUsario("","","");
-		 gerenciaFilme.AlugaFilme(filmeid,logar.getUsuario().getUsuarioId().toString());
+		 logar.VerificaUsario("email","123");
 
+		gerenciaFilme.ListatodosFilme();
+		gerenciaFilme.AlugaFilme(filmeid,logar.getUsuario().getUsuarioId().toString());
+		gerenciaFilme.meuFilme(logar.getUsuario().getUsuarioId().toString());
+		gerenciaFilme.DevolveFilme(1,logar.getUsuario().getUsuarioId().toString());
+		logar.criaUsario("teste","teste","teste");
 	}
 
 }

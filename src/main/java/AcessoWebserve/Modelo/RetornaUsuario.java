@@ -16,17 +16,16 @@ public class RetornaUsuario {
         this.usuario = usuario;
     }
 
-    public String VerificaUsario(String email,String senha) throws IOException {
+    public Usuario VerificaUsario(String email,String senha) throws IOException {
         URL loginUrl = new URL("http://localhost:8080/locadora/webserv.php?e="+email+"&p="+senha);
         InputStreamReader loginReader = new InputStreamReader(loginUrl.openStream());
         RetornaUsuario login = new Gson().fromJson(loginReader, RetornaUsuario.class);
-        return login.getUsuario().getUsuarioNome();
-
+       return usuario=login.getUsuario();
     }
 
     public String criaUsario(String nome,String email,String pass) throws IOException {
         URL loginUrl = new URL("http://localhost:8080/locadora/userSalva.php?nome="+nome+"&email="+email+"&pass="+pass);
         InputStreamReader loginReader = new InputStreamReader(loginUrl.openStream());
-         return "salvo user";
+        return "salvo user";
     }
  }

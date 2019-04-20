@@ -18,45 +18,36 @@ public class RetornaFilme {
         this.filme = filme;
     }
 
-    public String ListatodosFilme() throws IOException {
+    public Filme ListatodosFilme() throws IOException {
         URL filmeUrl = new URL("http://localhost:8080/locadora/listaFilme.php");
         InputStreamReader filmeReader = new InputStreamReader(filmeUrl.openStream());
         RetornaFilme filmeLista = new Gson().fromJson(filmeReader, RetornaFilme.class);
-       // System.out.println(filmeLita.getFilme());
-        return "ID: "       + filmeLista.getFilme().getFilmeId().toString()
-              +"Diretor: "  + filmeLista.getFilme().getFilmeDiretor()
-              +"Titulo :"   + filmeLista.getFilme().getFilmeTitulo();
+       return filme=filmeLista.getFilme();
     }
-    public String BuscaTituloFilme(String titulo) throws IOException {
+    public Filme BuscaTituloFilme(String titulo) throws IOException {
         URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/listaFilme.php?e="+titulo);
         InputStreamReader filmeBuscaReader = new InputStreamReader(filmeBuscaUrl.openStream());
         RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
-
-        return "ID: "       + filmeBusca.getFilme().getFilmeId().toString()
-              +"Diretor: "  + filmeBusca.getFilme().getFilmeDiretor()
-              +"Titulo :"   + filmeBusca.getFilme().getFilmeTitulo();
+        return filme=filmeBusca.getFilme();
     }
-    public String meuFilme(String usuarioId) throws IOException {
-        URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/meuFilme.php?e="+usuarioId);
+    public Filme meuFilme(String usuarioId) throws IOException {
+        URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/meuFilme.php?usuarioId="+usuarioId);
         InputStreamReader filmeBuscaReader = new InputStreamReader(filmeBuscaUrl.openStream());
-        RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
-
-        return "ID: "       + filmeBusca.getFilme().getFilmeId().toString()
-                +"Diretor: "  + filmeBusca.getFilme().getFilmeDiretor()
-                +"Titulo :"   + filmeBusca.getFilme().getFilmeTitulo();
+        RetornaFilme buscaMeuFilme = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
+        return filme=buscaMeuFilme.getFilme();
     }
+
     public String AlugaFilme(int filmeId, String usuarioId) throws IOException {
         URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/alugaFilme.php?filmeId="+filmeId+"&usuarioId="+usuarioId+"&status=alugado");
         InputStreamReader filmeBuscaReader = new InputStreamReader(filmeBuscaUrl.openStream());
-        RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
-
+        //RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
         return "Filme Alugado";
+
     }
     public String DevolveFilme(int filmeId, String usuarioId) throws IOException {
-        URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/alugaFilme.php?filmeId="+filmeId+"&usuarioId="+usuarioId+"&status=Disponivel");
+        URL filmeBuscaUrl = new URL("http://localhost:8080/locadora/devolveFilme.php?filmeId="+filmeId+"&usuarioId="+usuarioId+"&status=Disponivel");
         InputStreamReader filmeBuscaReader = new InputStreamReader(filmeBuscaUrl.openStream());
-        RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
-
+//        RetornaFilme filmeBusca = new Gson().fromJson(filmeBuscaReader, RetornaFilme.class);
         return "Filme Devolvido";
     }
 }
